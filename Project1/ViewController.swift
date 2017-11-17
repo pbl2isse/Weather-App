@@ -13,7 +13,7 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Storm Viewer"
+        title = "Action"
             // Do any additional setup after loading the view, typically from a nib.
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
