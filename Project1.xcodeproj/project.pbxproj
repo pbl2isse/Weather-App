@@ -12,6 +12,10 @@
 		142693041FBBFB660030608B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142693021FBBFB660030608B /* Main.storyboard */; };
 		142693061FBBFB660030608B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142693051FBBFB660030608B /* Assets.xcassets */; };
 		142693091FBBFB660030608B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142693071FBBFB660030608B /* LaunchScreen.storyboard */; };
+		142693141FBBFDD60030608B /* nssl0033.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 142693111FBBFDD60030608B /* nssl0033.jpg */; };
+		142693151FBBFDD60030608B /* nssl0034.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 142693121FBBFDD60030608B /* nssl0034.jpg */; };
+		142693161FBBFDD60030608B /* nssl0041.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 142693131FBBFDD60030608B /* nssl0041.jpg */; };
+		142693181FBC03660030608B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142693171FBC03660030608B /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		142693051FBBFB660030608B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		142693081FBBFB660030608B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1426930A1FBBFB660030608B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		142693111FBBFDD60030608B /* nssl0033.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0033.jpg; sourceTree = "<group>"; };
+		142693121FBBFDD60030608B /* nssl0034.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0034.jpg; sourceTree = "<group>"; };
+		142693131FBBFDD60030608B /* nssl0041.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0041.jpg; sourceTree = "<group>"; };
+		142693171FBC03660030608B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +64,24 @@
 			children = (
 				142692FE1FBBFB660030608B /* AppDelegate.swift */,
 				142693001FBBFB660030608B /* ViewController.swift */,
+				142693171FBC03660030608B /* DetailViewController.swift */,
 				142693021FBBFB660030608B /* Main.storyboard */,
 				142693051FBBFB660030608B /* Assets.xcassets */,
 				142693071FBBFB660030608B /* LaunchScreen.storyboard */,
 				1426930A1FBBFB660030608B /* Info.plist */,
+				142693101FBBFDD60030608B /* project1files */,
 			);
 			path = Project1;
+			sourceTree = "<group>";
+		};
+		142693101FBBFDD60030608B /* project1files */ = {
+			isa = PBXGroup;
+			children = (
+				142693111FBBFDD60030608B /* nssl0033.jpg */,
+				142693121FBBFDD60030608B /* nssl0034.jpg */,
+				142693131FBBFDD60030608B /* nssl0041.jpg */,
+			);
+			path = project1files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,8 +143,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142693151FBBFDD60030608B /* nssl0034.jpg in Resources */,
 				142693091FBBFB660030608B /* LaunchScreen.storyboard in Resources */,
+				142693141FBBFDD60030608B /* nssl0033.jpg in Resources */,
 				142693061FBBFB660030608B /* Assets.xcassets in Resources */,
+				142693161FBBFDD60030608B /* nssl0041.jpg in Resources */,
 				142693041FBBFB660030608B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142693181FBC03660030608B /* DetailViewController.swift in Sources */,
 				142693011FBBFB660030608B /* ViewController.swift in Sources */,
 				142692FF1FBBFB660030608B /* AppDelegate.swift in Sources */,
 			);
