@@ -16,6 +16,7 @@
 		142693151FBBFDD60030608B /* nssl0034.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 142693121FBBFDD60030608B /* nssl0034.jpg */; };
 		142693161FBBFDD60030608B /* nssl0041.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 142693131FBBFDD60030608B /* nssl0041.jpg */; };
 		142693181FBC03660030608B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142693171FBC03660030608B /* DetailViewController.swift */; };
+		3AD31D8A1FC7DBCA004F0E1F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD31D891FC7DBCA004F0E1F /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		142693121FBBFDD60030608B /* nssl0034.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0034.jpg; sourceTree = "<group>"; };
 		142693131FBBFDD60030608B /* nssl0041.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0041.jpg; sourceTree = "<group>"; };
 		142693171FBC03660030608B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		3AD31D891FC7DBCA004F0E1F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		142692FD1FBBFB660030608B /* Project1 */ = {
 			isa = PBXGroup;
 			children = (
+				3AD31D891FC7DBCA004F0E1F /* SwiftyJSON.swift */,
 				142692FE1FBBFB660030608B /* AppDelegate.swift */,
 				142693001FBBFB660030608B /* ViewController.swift */,
 				142693171FBC03660030608B /* DetailViewController.swift */,
@@ -163,6 +166,7 @@
 				142693181FBC03660030608B /* DetailViewController.swift in Sources */,
 				142693011FBBFB660030608B /* ViewController.swift in Sources */,
 				142692FF1FBBFB660030608B /* AppDelegate.swift in Sources */,
+				3AD31D8A1FC7DBCA004F0E1F /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

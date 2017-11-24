@@ -9,38 +9,41 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    var pictures = [String]()
+    var cities : [String] = ["Kyoto,JP", "Kusatsu,JP", "Jakarta,ID", "Bangkok,TH", "Manila,PH"]
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
-        title = "Action 2"
-            // Do any additional setup after loading the view, typically from a nib.
-        let fm = FileManager.default
-        let path = Bundle.main.resourcePath!
-        let items = try! fm.contentsOfDirectory(atPath: path)
+        title = "Weather App"
+        print(cities)
         
-        for item in items {
-            if item.hasPrefix("nssl") {
-                pictures.append(item)
-            }
-        }
-        print(pictures)
     }
 
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pictures.count
+        return cities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = pictures[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "City", for: indexPath)
+        cell.textLabel?.text = cities[indexPath.row]
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let urlString: String
+        urlString =  "https://api.openweathermap.org/data/2.5/weather?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9"
+        if let url = URL(string: urlString) {
+            if let data = try? Data(contentsOf: url) {
+                let json = try! JSON(data: data)
+                if json["metadata"]["responseInfo"]["status"].intValue == 200 {
+                }
+                print(json["main"]["temp"])
+                print(json["main"]["humidity"])
+            }
+        }
         // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             // 2: success! Set its selectedImage property
-            vc.selectedImage = pictures[indexPath.row]
+            vc.selectedImage = cities[indexPath.row]
             
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
