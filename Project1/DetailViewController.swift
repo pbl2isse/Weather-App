@@ -7,19 +7,37 @@
 //
 
 import UIKit
+import WebKit
 
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var webView: WKWebView!
     var selectedImage: String?
+    var detailItem: [String: String]!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        //if let body = detailItem["body"] {
+            var html = "<html>"
+            html += "<head>"
+            html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+            html += "<style> body { font-size: 150%; } </style>"
+            html += "</head>"
+            html += "<body>"
+            html += "Weather: clear sky"
+            html += "</body>"
+            html += "</html>"
+            webView.loadHTMLString(html, baseURL: nil)
+        //}
+        /*
         if let imageToLoad = selectedImage {
             imageView.image  = UIImage(named: imageToLoad)
         }
 
         title = selectedImage
+        */
         // Do any additional setup after loading the view.
     }
 
