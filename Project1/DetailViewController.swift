@@ -14,23 +14,30 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var webView: WKWebView!
     var selectedImage: String?
-    var detailItem: [String: String]!
+    var detailItem: [String: String]?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        //if let body = detailItem["body"] {
+        if let body = detailItem {
             var html = "<html>"
             html += "<head>"
             html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
             html += "<style> body { font-size: 150%; } </style>"
             html += "</head>"
             html += "<body>"
-            html += "Weather: clear sky"
+            html += "<font face=\"verdana\" color=\"#F5A696\">"
+            html += "temperature: " + (body["temperature"])! + "˚C"
+            html += "<br/>"
+            html += "humidity: " + (body["humidity"])! + "%"
+            html += "<br/>"
+            html += "weather: " + (body["weather"])!
+            html += "<br/>"
+            html += "</font>"
             html += "</body>"
             html += "</html>"
             webView.loadHTMLString(html, baseURL: nil)
-        //}
+        }
         /*
         if let imageToLoad = selectedImage {
             imageView.image  = UIImage(named: imageToLoad)

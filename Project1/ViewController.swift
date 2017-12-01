@@ -30,33 +30,22 @@ class ViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let urlString: String
-        var weatherData = [String: String]()
         urlString =  "https://api.openweathermap.org/data/2.5/weather?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9"
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
                 let json = try! JSON(data: data)
-                if json["metadata"]["responseInfo"]["status"].intValue == 200 {
-                }
-                weatherData["temperature"] = json["main"]["temp"]
-                weatherData["humidity"] = json["main"]["humidity"]
-                weatherData["weather"] = json["weather"][0]["main"]
-                
-                
-                
                 print(json)
-                print(json["main"]["temp"])
-                print(json["main"]["humidity"])
-                print(json["weather"][0]["main"])
+                let weatherData = ["temperature": "\(json["main"]["temp"].floatValue - 273.15)", "humidity": json["main"]["humidity"].stringValue, "weather": json["weather"][0]["main"].stringValue]
+                // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+                    // 2: success! Set its selectedImage property
+                    vc.selectedImage = cities[indexPath.row]
+                    
+                    // 3: now push it onto the navigation controller
+                    vc.detailItem = weatherData
+                    navigationController?.pushViewController(vc, animated: true)
+                }
             }
-        }
-        // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            // 2: success! Set its selectedImage property
-            vc.selectedImage = cities[indexPath.row]
-            
-            // 3: now push it onto the navigation controller
-            vc.detailItem = weatherData!
-            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
