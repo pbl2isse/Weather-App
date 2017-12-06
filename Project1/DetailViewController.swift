@@ -38,13 +38,10 @@ class DetailViewController: UIViewController {
             html += "</html>"
             webView.loadHTMLString(html, baseURL: nil)
         }
-        /*
-        if let imageToLoad = selectedImage {
-            imageView.image  = UIImage(named: imageToLoad)
-        }
+        imageView.image  = UIImage(named: )
 
         title = selectedImage
-        */
+        
         // Do any additional setup after loading the view.
     }
 
