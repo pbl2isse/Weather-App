@@ -30,22 +30,39 @@ class ViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let urlString: String
+        let urlRope: String
+        var jsonWeather: JSON?
+        var jsonForecast: JSON?
+        
         urlString =  "https://api.openweathermap.org/data/2.5/weather?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9"
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
-                let json = try! JSON(data: data)
-                print(json)
-                let weatherData = ["temperature": "\(json["main"]["temp"].floatValue - 273.15)", "humidity": json["main"]["humidity"].stringValue, "weather": json["weather"][0]["main"].stringValue, "icon": json["weather"][0]["icon"].stringValue]
+                jsonWeather = try! JSON(data: data)
+            }
+        }
+        
+        urlRope =  "https://api.openweathermap.org/data/2.5/forecast?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9"
+        if let url = URL(string: urlRope) {
+            if let data = try? Data(contentsOf: url) {
+                jsonForecast = try! JSON(data: data)
+            }
+        }
+        
+        
+        
+        print(jsonWeather)
+        print(jsonForecast)
+        let weatherData = ["temperature": "\(jsonWeather!["main"]["temp"].floatValue - 273.15)", "humidity": jsonWeather!["main"]["humidity"].stringValue, "weather": jsonWeather!["weather"][0]["main"].stringValue, "icon": jsonWeather!["weather"][0]["icon"].stringValue]
+        let forecastData = ["temperature": "\(jsonForecast!["main"]["temp"].floatValue - 273.15)", "humidity": jsonForecast!["main"]["humidity"].stringValue, "weather": jsonForecast!["weather"][0]["main"].stringValue, "icon": jsonForecast!["weather"][0]["icon"].stringValue]
                 // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
-                if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
                     // 2: success! Set its selectedImage property
-                    vc.selectedImage = cities[indexPath.row]
+            vc.selectedImage = cities[indexPath.row]
                     
                     // 3: now push it onto the navigation controller
-                    vc.detailItem = weatherData
-                    navigationController?.pushViewController(vc, animated: true)
-                }
-            }
+            vc.weather = weatherData
+            vc.forecast = forecastData
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     

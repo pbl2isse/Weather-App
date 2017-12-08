@@ -13,13 +13,16 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var imageView2: UIImageView!
+    @IBOutlet weak var webView2: WKWebView!
     var selectedImage: String?
-    var detailItem: [String: String]?
+    var weather: [String: String]?
+    var forecast: [String: String]?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if let body = detailItem {
+        if let body = weather {
             var html = "<html>"
             html += "<head>"
             html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
@@ -42,6 +45,34 @@ class DetailViewController: UIViewController {
             if let url = URL(string: urlString) {
                 if let iconData = try? Data(contentsOf: url) {
                     imageView.image  = UIImage(data: iconData)
+                }
+            }
+            
+        }
+        super.viewDidLoad()
+        if let body = forecast {
+            var html = "<html>"
+            html += "<head>"
+            html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+            html += "<style> body { font-size: 150%; } </style>"
+            html += "</head>"
+            html += "<body>"
+            html += "<font face=\"verdana\" color=\"#F5A696\">"
+            html += "weather: " + (body["weather"])!
+            html += "<br/>"
+            html += "temperature: " + (body["temperature"])! + "˚C"
+            html += "<br/>"
+            html += "humidity: " + (body["humidity"])! + "%"
+            html += "<br/>"
+            html += "</font>"
+            html += "</body>"
+            html += "</html>"
+            webView2.loadHTMLString(html, baseURL: nil)
+            let urlString: String
+            urlString = "https://openweathermap.org/img/w/" + (body["icon"])! + ".png"
+            if let url = URL(string: urlString) {
+                if let iconData = try? Data(contentsOf: url) {
+                    imageView2.image  = UIImage(data: iconData)
                 }
             }
             
