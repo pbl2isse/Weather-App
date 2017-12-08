@@ -27,11 +27,11 @@ class DetailViewController: UIViewController {
             html += "</head>"
             html += "<body>"
             html += "<font face=\"verdana\" color=\"#F5A696\">"
+            html += "weather: " + (body["weather"])!
+            html += "<br/>"
             html += "temperature: " + (body["temperature"])! + "˚C"
             html += "<br/>"
             html += "humidity: " + (body["humidity"])! + "%"
-            html += "<br/>"
-            html += "weather: " + (body["weather"])!
             html += "<br/>"
             html += "</font>"
             html += "</body>"
