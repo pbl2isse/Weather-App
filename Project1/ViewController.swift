@@ -50,10 +50,10 @@ class ViewController: UITableViewController {
         
         
         
-        print(jsonWeather)
-        print(jsonForecast)
+        print(jsonWeather!)
+        print(jsonForecast!)
         let weatherData = ["temperature": "\(jsonWeather!["main"]["temp"].floatValue - 273.15)", "humidity": jsonWeather!["main"]["humidity"].stringValue, "weather": jsonWeather!["weather"][0]["main"].stringValue, "icon": jsonWeather!["weather"][0]["icon"].stringValue]
-        let forecastData = ["temperature": "\(jsonForecast!["main"]["temp"].floatValue - 273.15)", "humidity": jsonForecast!["main"]["humidity"].stringValue, "weather": jsonForecast!["weather"][0]["main"].stringValue, "icon": jsonForecast!["weather"][0]["icon"].stringValue]
+        let forecastData = ["icon": jsonForecast!["list"][0]["weather"][0]["icon"].stringValue]
                 // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
                     // 2: success! Set its selectedImage property
