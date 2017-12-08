@@ -37,14 +37,18 @@ class DetailViewController: UIViewController {
             html += "</body>"
             html += "</html>"
             webView.loadHTMLString(html, baseURL: nil)
+            let urlString: String
+            urlString = "https://openweathermap.org/img/w/" + (body["icon"])! + ".png"
+            if let url = URL(string: urlString) {
+                if let iconData = try? Data(contentsOf: url) {
+                    imageView.image  = UIImage(data: iconData)
+                }
+            }
+            
         }
-        /*
-        if let imageToLoad = selectedImage {
-            imageView.image  = UIImage(named: imageToLoad)
-        }
-
+        
         title = selectedImage
-        */
+        
         // Do any additional setup after loading the view.
     }
 
