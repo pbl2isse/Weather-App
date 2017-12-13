@@ -34,14 +34,14 @@ class ViewController: UITableViewController {
         var jsonWeather: JSON?
         var jsonForecast: JSON?
         
-        urlString =  "https://api.openweathermap.org/data/2.5/weather?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9"
+        urlString =  "https://api.openweathermap.org/data/2.5/weather?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9&units=metric"
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
                 jsonWeather = try! JSON(data: data)
             }
         }
         
-        urlRope =  "https://api.openweathermap.org/data/2.5/forecast?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9"
+        urlRope =  "https://api.openweathermap.org/data/2.5/forecast?q="+cities[indexPath.row]+"&appid=a5ff8344e2fbb334db408ba2738884f9&units=metric"
         if let url = URL(string: urlRope) {
             if let data = try? Data(contentsOf: url) {
                 jsonForecast = try! JSON(data: data)
@@ -52,8 +52,20 @@ class ViewController: UITableViewController {
         
         print(jsonWeather!)
         print(jsonForecast!)
-        let weatherData = ["temperature": "\(jsonWeather!["main"]["temp"].floatValue - 273.15)", "humidity": jsonWeather!["main"]["humidity"].stringValue, "weather": jsonWeather!["weather"][0]["main"].stringValue, "icon": jsonWeather!["weather"][0]["icon"].stringValue]
-        let forecastData = ["icon": jsonForecast!["list"][0]["weather"][0]["icon"].stringValue]
+        let weatherData = [
+            "temperature": jsonWeather!["main"]["temp"].stringValue,
+            "humidity": jsonWeather!["main"]["humidity"].stringValue,
+            "weather": jsonWeather!["weather"][0]["main"].stringValue,
+            "icon": jsonWeather!["weather"][0]["icon"].stringValue
+        ]
+        let forecastData = [
+            "icon": jsonForecast!["list"][0]["weather"][0]["icon"].stringValue,
+            "minTemp": jsonForecast!["list"][0]["main"]["temp_min"].stringValue,
+            "maxTemp": jsonForecast!["list"][0]["main"]["temp_max"].stringValue,
+            "weather": jsonForecast!["list"][0]["weather"][0]["main"].stringValue
+        ]
+        print(weatherData)
+        print(forecastData)
                 // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
                     // 2: success! Set its selectedImage property

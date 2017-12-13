@@ -51,23 +51,23 @@ class DetailViewController: UIViewController {
         }
         super.viewDidLoad()
         if let body = forecast {
-            /*var html = "<html>"
+            var html = "<html>"
             html += "<head>"
             html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-            html += "<style> body { font-size: 150%; } </style>"
+            html += "<style> body { font-size: 90%; } </style>"
             html += "</head>"
             html += "<body>"
             html += "<font face=\"verdana\" color=\"#F5A696\">"
-            html += "weather: " + (body["weather"])!
+            html += "Weather:" + (body["weather"])!
             html += "<br/>"
-            html += "temperature: " + (body["temperature"])! + "˚C"
+            html += "Low: " + (body["minTemp"])! + "˚C"
             html += "<br/>"
-            html += "humidity: " + (body["humidity"])! + "%"
+            html += "High: " + (body["maxTemp"])! + "˚C"
             html += "<br/>"
             html += "</font>"
             html += "</body>"
             html += "</html>"
-            webView2.loadHTMLString(html, baseURL: nil)*/
+            webView2.loadHTMLString(html, baseURL: nil)
             let urlString: String
             urlString = "https://openweathermap.org/img/w/" + (body["icon"])! + ".png"
             if let url = URL(string: urlString) {
