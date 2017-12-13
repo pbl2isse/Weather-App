@@ -63,7 +63,6 @@ class ViewController: UITableViewController {
                 print (weatherItem["dt_txt"])
             }
         }
-
         var list = jsonForecast!["list"][0]
         let forecastData = [
             "icon": list["weather"][0]["icon"].stringValue,
