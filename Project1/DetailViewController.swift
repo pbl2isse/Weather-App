@@ -58,7 +58,7 @@ class DetailViewController: UIViewController {
             html += "</head>"
             html += "<body>"
             html += "<font face=\"verdana\" color=\"#F5A696\">"
-            html += "Weather:" + (body["weather"])!
+            html += (body["weather"])!
             html += "<br/>"
             html += "Low: " + (body["minTemp"])! + "˚C"
             html += "<br/>"
@@ -72,7 +72,7 @@ class DetailViewController: UIViewController {
             urlString = "https://openweathermap.org/img/w/" + (body["icon"])! + ".png"
             if let url = URL(string: urlString) {
                 if let iconData = try? Data(contentsOf: url) {
-                    imageView2.image  = UIImage(data: iconData)
+                    imageView2.image = UIImage(data: iconData)
                 }
             }
             
