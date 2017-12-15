@@ -50,26 +50,34 @@ class ViewController: UITableViewController {
         
         
         
-        print(jsonWeather!)
-        print(jsonForecast!)
+        //print(jsonWeather!)
+        //print(jsonForecast!)
         let weatherData = [
-            "temperature": jsonWeather!["main"]["temp"].stringValue,
+            "temperature": "\(jsonWeather!["main"]["temp"].intValue)",
             "humidity": jsonWeather!["main"]["humidity"].stringValue,
             "weather": jsonWeather!["weather"][0]["main"].stringValue,
             "icon": jsonWeather!["weather"][0]["icon"].stringValue
         ]
+        var fiveDays: Array<[String:String]> = Array()
         if let weatherItems = jsonForecast!["list"].array {
             for weatherItem in weatherItems {
-                print (weatherItem["dt_txt"])
+                let dt = weatherItem["dt_txt"].string!
+                let suffix = String(dt.suffix(8))
+                if suffix == "12:00:00"{
+                    print (weatherItem["dt_txt"])
+                    let forecastData = [
+                        "icon": weatherItem["weather"][0]["icon"].stringValue,
+                        "minTemp": "\(weatherItem["main"]["temp_min"].intValue)",
+                        "maxTemp": "\(weatherItem["main"]["temp_max"].intValue)",
+                        "weather": weatherItem["weather"][0]["main"].stringValue
+                    ]
+                    fiveDays.append(forecastData)
+                }
             }
         }
-        var list = jsonForecast!["list"][0]
-        let forecastData = [
-            "icon": list["weather"][0]["icon"].stringValue,
-            "minTemp": list["main"]["temp_min"].stringValue,
-            "maxTemp": list["main"]["temp_max"].stringValue,
-            "weather": list["weather"][0]["main"].stringValue
-        ]
+        print(fiveDays)
+        
+        
 //        print(weatherData)
 //        print(forecastData)
                 // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
@@ -79,7 +87,7 @@ class ViewController: UITableViewController {
                     
                     // 3: now push it onto the navigation controller
             vc.weather = weatherData
-            vc.forecast = forecastData
+            vc.forecast = fiveDays
             navigationController?.pushViewController(vc, animated: true)
         }
     }
