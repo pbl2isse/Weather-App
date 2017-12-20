@@ -12,34 +12,25 @@ import WebKit
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var imageView2: UIImageView!
-    @IBOutlet weak var webView2: WKWebView!
+    @IBOutlet weak var textLabel2: UILabel!
     var selectedImage: String?
     var weather: [String: String]?
-    var forecast: [String: String]?
+    var forecast: Array<[String: String]>?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         if let body = weather {
-            var html = "<html>"
-            html += "<head>"
-            html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-            html += "<style> body { font-size: 150%; } </style>"
-            html += "</head>"
-            html += "<body>"
-            html += "<font face=\"verdana\" color=\"#F5A696\">"
-            html += "weather: " + (body["weather"])!
-            html += "<br/>"
-            html += "temperature: " + (body["temperature"])! + "˚C"
-            html += "<br/>"
-            html += "humidity: " + (body["humidity"])! + "%"
-            html += "<br/>"
-            html += "</font>"
-            html += "</body>"
-            html += "</html>"
-            webView.loadHTMLString(html, baseURL: nil)
+            textLabel.font = UIFont(name: textLabel.font.fontName, size: 28)
+            textLabel.textColor = UIColor(displayP3Red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
+            textLabel.numberOfLines = 3
+            textLabel.text =
+                "Weather: " + (body["weather"])! +
+                "\n" + "Temperature: " + (body["temperature"])! + "˚C" +
+                "\n" + "Humidity: " + (body["humidity"])! + "%"
+            
             let urlString: String
             urlString = "https://openweathermap.org/img/w/" + (body["icon"])! + ".png"
             if let url = URL(string: urlString) {
@@ -50,33 +41,27 @@ class DetailViewController: UIViewController {
             
         }
         super.viewDidLoad()
-        if let body = forecast {
-            /*var html = "<html>"
-            html += "<head>"
-            html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-            html += "<style> body { font-size: 150%; } </style>"
-            html += "</head>"
-            html += "<body>"
-            html += "<font face=\"verdana\" color=\"#F5A696\">"
-            html += "weather: " + (body["weather"])!
-            html += "<br/>"
-            html += "temperature: " + (body["temperature"])! + "˚C"
-            html += "<br/>"
-            html += "humidity: " + (body["humidity"])! + "%"
-            html += "<br/>"
-            html += "</font>"
-            html += "</body>"
-            html += "</html>"
-            webView2.loadHTMLString(html, baseURL: nil)*/
-            let urlString: String
-            urlString = "https://openweathermap.org/img/w/" + (body["icon"])! + ".png"
-            if let url = URL(string: urlString) {
-                if let iconData = try? Data(contentsOf: url) {
-                    imageView2.image  = UIImage(data: iconData)
-                }
+        let day1 = forecast![0]
+        textLabel2.font = UIFont(name: textLabel2.font.fontName, size: 14)
+        textLabel2.textColor = UIColor(displayP3Red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
+        textLabel2.numberOfLines = 5
+        textLabel2.text =
+            (day1["weather"])! +
+            "\n" +
+            "\n" + "Low:" + (day1["minTemp"])! + "˚C" +
+            "\n" +
+            "\n" + "High: " + (day1["maxTemp"])! + "˚C"
+        
+        let urlString: String
+        urlString = "https://openweathermap.org/img/w/" + (day1["icon"])! + ".png"
+        if let url = URL(string: urlString) {
+            if let iconData = try? Data(contentsOf: url) {
+                imageView2.image = UIImage(data: iconData)
+                
             }
-            
         }
+        
+        
         
         title = selectedImage
         
