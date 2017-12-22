@@ -53,6 +53,7 @@ class ViewController: UITableViewController {
         //print(jsonWeather!)
         //print(jsonForecast!)
         let weatherData = [
+            "name": jsonWeather!["name"].stringValue,
             "temperature": "\(jsonWeather!["main"]["temp"].intValue)",
             "humidity": jsonWeather!["main"]["humidity"].stringValue,
             "weather": jsonWeather!["weather"][0]["main"].stringValue,
@@ -83,7 +84,6 @@ class ViewController: UITableViewController {
                 // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
                     // 2: success! Set its selectedImage property
-            vc.selectedImage = cities[indexPath.row]
                     
                     // 3: now push it onto the navigation controller
             vc.weather = weatherData
