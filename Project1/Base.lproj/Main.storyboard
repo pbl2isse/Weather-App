@@ -31,7 +31,13 @@
                             <outlet property="delegate" destination="Yio-RY-ocw" id="xdq-lB-pei"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="OlL-Uf-idA"/>
+                    <navigationItem key="navigationItem" id="OlL-Uf-idA">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="KLF-aJ-71u">
+                            <connections>
+                                <action selector="citySelect:" destination="Yio-RY-ocw" id="c9y-Oz-07s"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOs-sx-ps4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

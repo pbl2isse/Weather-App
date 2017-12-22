@@ -10,14 +10,33 @@ import UIKit
 
 class ViewController: UITableViewController {
     var cities : [String] = ["Kyoto,JP", "Kusatsu,JP", "Jakarta,ID", "Bangkok,TH", "Manila,PH"]
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad(){
         super.viewDidLoad()
         title = "Weather App"
+        cities = defaults.object(forKey:"cityName") as? [String] ?? [String]()
         print(cities)
         
     }
+    @IBAction func citySelect(_ sender: Any) {
+        print("buttonpressed")
+        let ac = UIAlertController(title: "Enter city name i.e. (city,country code)", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned self, ac] (action: UIAlertAction) in
+            let cityName = ac.textFields![0]
+            self.cities.append(cityName.text!)
+            self.tableView.reloadData()
+            self.defaults.set(self.cities, forKey: "cityName")
+        }
 
+        
+        ac.addAction(submitAction)
+        
+        present(ac, animated: true)
+    }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
@@ -45,6 +64,7 @@ class ViewController: UITableViewController {
         if let url = URL(string: urlRope) {
             if let data = try? Data(contentsOf: url) {
                 jsonForecast = try! JSON(data: data)
+                print(jsonForecast)
             }
         }
         
@@ -95,6 +115,17 @@ class ViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            cities.remove(at: indexPath.row)
+            tableView.reloadData()
+            self.defaults.set(self.cities, forKey: "cityName")
+        }
     }
 }
 
