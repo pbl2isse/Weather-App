@@ -81,20 +81,43 @@ class ViewController: UITableViewController {
         ]
         var fiveDays: Array<[String:String]> = Array()
         if let weatherItems = jsonForecast!["list"].array {
+            var icon: String = jsonWeather!["weather"][0]["icon"].stringValue
+            var minTemp: Int = jsonWeather!["main"]["temp_min"].intValue
+            var maxTemp: Int = jsonWeather!["main"]["temp_max"].intValue
+            var weather: String = jsonWeather!["weather"][0]["main"].stringValue
             for weatherItem in weatherItems {
                 let dt = weatherItem["dt_txt"].string!
                 let suffix = String(dt.suffix(8))
-                if suffix == "12:00:00"{
-                    print (weatherItem["dt_txt"])
+                if suffix == "00:00:00"{
                     let forecastData = [
-                        "icon": weatherItem["weather"][0]["icon"].stringValue,
-                        "minTemp": "\(weatherItem["main"]["temp_min"].intValue)",
-                        "maxTemp": "\(weatherItem["main"]["temp_max"].intValue)",
-                        "weather": weatherItem["weather"][0]["main"].stringValue
+                        "icon": icon,
+                        "minTemp": "\(minTemp)",
+                        "maxTemp": "\(maxTemp)",
+                        "weather": weather
                     ]
-                    fiveDays.append(forecastData)
+                     fiveDays.append(forecastData)
+                     minTemp = weatherItem["main"]["temp_min"].intValue
+                     maxTemp = weatherItem["main"]["temp_max"].intValue
+                } else {
+                    if minTemp > weatherItem["main"]["temp_min"].intValue {
+                        minTemp = weatherItem["main"]["temp_min"].intValue
+                    }
+                    if maxTemp < weatherItem["main"]["temp_max"].intValue {
+                        maxTemp = weatherItem["main"]["temp_max"].intValue
+                    }
+                }
+                if suffix == "12:00:00"{
+                    icon = weatherItem["weather"][0]["icon"].stringValue
+                    weather = weatherItem["weather"][0]["main"].stringValue
                 }
             }
+            let forecastData = [
+                "icon": icon,
+                "minTemp": "\(minTemp)",
+                "maxTemp": "\(maxTemp)",
+                "weather": weather
+            ]
+            fiveDays.append(forecastData)
         }
         print(fiveDays)
         
